@@ -1,0 +1,71 @@
+CREATE DATABASE EXCERSISE;
+
+
+CREATE SEQUENCE id_seq
+START 2
+INCREMENT 2;
+
+-- 1.Employee Table
+CREATE TABLE Employee(ID INT,
+                      Name VARCHAR(20),
+                      Department VARCHAR(30),
+                      Salary INT,
+                      Age INT,
+                      MobileNumber VARCHAR(20),
+                      JoiningDate DATE);
+                      
+                    
+SELECT * FROM Employee;
+DROP TABLE Employee;
+                       
+INSERT INTO Employee(ID,Name,Department,Salary,Age,MobileNumber,JoiningDate) VALUES
+(nextval('id_seq'),'Raja','Developer',20000,20,'6385820982','2022-05-13'),
+(nextval('id_seq'),'Athi','Testing',15000,26,'9876543210','2018-06-20'),
+(nextval('id_seq'),'Swetha','Testing',18000,21,'8876543210','2020-09-05'),
+(nextval('id_seq'),'Ravi','HR',30000,35,'7876543210','2000-01-02'),
+(nextval('id_seq'),'Deva','Debug',25000,41,'6876543210','2000-09-28'),
+(nextval('id_seq'),'Indhu','Developer',38000,22,'9576543210','2015-04-18'),
+(nextval('id_seq'),'Krithik','Developer',25000,25,'9676543210','2000-04-21'),
+(nextval('id_seq'),'Mahesh','Debug',10000,20,'9076543210','2021-08-25'),
+(nextval('id_seq'),'Sivam','HR',12000,24,'9346543210','2000-02-29');
+
+-- 2.Employee Vehicle Table
+CREATE TABLE EmpVehicles(VehicleID SERIAL PRIMARY KEY,
+                        VehicleRegNo VARCHAR(10),
+                        VehicleCompName VARCHAR(20),
+                        EmployeeID INT);
+SELECT * FROM EmpVehicles; 
+DROP TABLE EmpVehicles;
+
+INSERT INTO EmpVehicles(VehicleRegNo,VehicleCompName,EmployeeID) VALUES
+('100','RoyalEnfield',4),
+('101','YAMAHA',4),
+('102','Suzuki',12),
+('103','BMW',4),
+('104','Audi',4),
+('105','Suzuki',14),
+('106','YAMAHA',8),
+('107','RoyalEnfield',8),
+('108','NINJA',8),
+('109','JAWA',8),
+('110','Suzuki',16),
+('111','HONDA',6)
+('112','FERARI',22)
+('113','Suzuki',6);
+
+-- 3.WeekendShiftEmployees Table
+CREATE TABLE WeekendShiftEmployees(ID INT,Name VARCHAR(20),
+                      Department VARCHAR(30),
+                      Salary INT,
+                      Age INT,
+                      MobileNumber VARCHAR(20),
+                      JoiningDate DATE);
+
+                      
+SELECT * FROM WeekendShiftEmployees;   
+DROP TABLE WeekendShiftEmployees;
+INSERT INTO WeekendShiftEmployees(ID,Name,Department,Salary,Age,MobileNumber,JoiningDate) VALUES
+(nextval('id_seq'),'Roja','Testing',32000,30,'6985820982','2000-05-19'),
+(nextval('id_seq'),'heshi','Debug',10000,40,'9176543210','2005-08-23'),
+(nextval('id_seq'),'Ethan','Developer',18000,21,'8976543210','2010-09-04');
+

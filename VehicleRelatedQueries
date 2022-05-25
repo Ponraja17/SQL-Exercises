@@ -1,0 +1,26 @@
+-- 9.More than 3 Vehicles
+SELECT t.ID AS EmployeeID,t.name,t.department FROM
+    (SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS t
+WHERE ID IN (
+SELECT V.EmployeeID FROM EmpVehicles AS V
+GROUP BY V.EmployeeID
+HAVING COUNT(V.EmployeeID)>3);
+
+-- 10.Who don't Have vehicle
+SELECT t.ID AS EmployeeID,t.name,t.department FROM
+(SELECT * FROM Employee
+UNION ALL
+SELECT * FROM WeekendShiftEmployees) AS t
+WHERE ID NOT IN(
+SELECT V.EmployeeID FROM EmpVehicles AS V
+GROUP BY V.EmployeeID);
+
+-- 11.Employee Who Have Suzuki Company Vehicles
+SELECT E.ID,E.name,EV.VehicleCompName FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees)AS E 
+    INNER JOIN EmpVehicles EV ON E.ID=EV.EmployeeID 
+    WHERE EV.VehicleCompName LIKE'S%i';

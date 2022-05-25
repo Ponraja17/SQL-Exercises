@@ -1,0 +1,96 @@
+-- 4.Joined Employees in 2000
+SELECT E.id,E.name FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+WHERE EXTRACT(YEAR FROM(joiningdate))=2000;
+
+-- 5.Department Wise Employee Count 
+
+SELECT E.Department,COUNT(E.Department) AS EmployeeCount FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+GROUP BY E.Department
+ORDER BY E.Department;
+
+-- 6.Average salary of Employee Deparment Wise
+SELECT E.Department,AVG(E.Salary) AS AverageSalary FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+GROUP BY E.Department
+ORDER BY AverageSalary DESC;
+
+-- 7.MIN & MAX Department Wise
+-- Employee Table MIN
+SELECT Department,MIN(salary) AS MinimumSalary FROM Employee
+GROUP BY Department
+ORDER BY MinimumSalary;
+-- For Both Employee And WeekendShiftEmployees
+SELECT E.Department,MAX(E.salary) AS MaximumSalary FROM(
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+GROUP BY E.Department
+ORDER BY MaximumSalary DESC;
+
+-- 8.Overall Salary of the Employees
+SELECT SUM(E.Salary) AS OverAllSalary FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E;
+
+-- 12.MAX Salary Employee Department Wise
+SELECT E.Name,E.Department,E.Salary FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+WHERE(Department,Salary) IN
+(SELECT Department,MAX(Salary) AS MaximumSalary FROM Employee
+GROUP BY Department)
+ORDER BY Salary DESC;
+
+-- 13.name Starts with 'S' Ends with 'm'
+SELECT E.* FROM (
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+WHERE name LIKE 'S%m';
+
+-- 14.Fetch Both Employee and WeekendShiftEmployee
+SELECT * FROM Employee
+UNION ALL
+SELECT * FROM WeekendShiftEmployees;
+
+-- 15.Top 5 Salary Earning Employees
+SELECT t.ID,t.name,t.department,t.salary FROM 
+(SELECT * FROM Employee
+UNION ALL
+SELECT * FROM WeekendShiftEmployees) AS t
+ORDER BY t.salary DESC
+LIMIT 5;
+
+-- 16.Second Highest salary
+SELECT E.ID,E.name,E.Department,E.salary FROM(
+    SELECT * FROM Employee
+    UNION ALL
+    SELECT * FROM WeekendShiftEmployees) AS E
+ORDER BY E.salary DESC
+OFFSET 1 LIMIT 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
